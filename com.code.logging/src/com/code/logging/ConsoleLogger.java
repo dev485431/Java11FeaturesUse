@@ -4,15 +4,9 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 /**
- * Just a simple logger implementation
+ * Just a simple logger implementation for this module
  */
 public class ConsoleLogger implements System.Logger {
-
-    public static void main(String[] args) {
-        ConsoleLogger log = new ConsoleLogger();
-        System.out.println(log.getName());
-        System.out.println(log.isLoggable(Level.ALL));
-    }
 
     @Override
     public String getName() {
@@ -22,6 +16,11 @@ public class ConsoleLogger implements System.Logger {
     @Override
     public boolean isLoggable(Level level) {
         return true;
+    }
+
+    @Override
+    public void log(Level level, String msg) {
+        System.out.printf("ConsoleLogger [%s]: %s%n", level, msg);
     }
 
     @Override

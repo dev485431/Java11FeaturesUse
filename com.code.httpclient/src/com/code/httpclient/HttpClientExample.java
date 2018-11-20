@@ -1,5 +1,7 @@
 package com.code.httpclient;
 
+import com.code.logging.ConsoleLogger;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 
 public class HttpClientExample {
 
+    private static final System.Logger LOG = new ConsoleLogger();
     public static void main(String[] args) throws Exception {
         httpGetRequest();
         httpPostRequest();
@@ -36,8 +39,8 @@ public class HttpClientExample {
                 .headers("Accept-Enconding", "gzip, deflate").build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String responseBody = response.body();
-        System.out.println("httpGetRequest");
-        System.out.println(responseBody);
+        LOG.log(System.Logger.Level.DEBUG, "httpGetRequest");
+        LOG.log(System.Logger.Level.DEBUG, responseBody);
     }
 
     /**
@@ -58,8 +61,8 @@ public class HttpClientExample {
         HttpResponse<String> response
                 = client.send(request, HttpResponse.BodyHandlers.ofString());
         String responseBody = response.body();
-        System.out.println("httpPostRequest");
-        System.out.println(responseBody);
+        LOG.log(System.Logger.Level.DEBUG, "httpPostRequest");
+        LOG.log(System.Logger.Level.DEBUG, responseBody);
     }
 
     /**
@@ -74,8 +77,8 @@ public class HttpClientExample {
         CompletableFuture<HttpResponse<String>> futureResponse = client.sendAsync(request,
                 HttpResponse.BodyHandlers.ofString());
         HttpResponse<String> res = futureResponse.get();
-        System.out.println("asynchronousRequest");
-        System.out.println(res.body());
+        LOG.log(System.Logger.Level.DEBUG, "asynchronousRequest");
+        LOG.log(System.Logger.Level.DEBUG, res.body());
     }
 
     /**
@@ -95,11 +98,11 @@ public class HttpClientExample {
                                         .build(),
                                 HttpResponse.BodyHandlers.ofString()))
                 .collect(Collectors.toList());
-        System.out.println("asynchronousMultipleRequests");
+        LOG.log(System.Logger.Level.DEBUG, "asynchronousMultipleRequests");
         futures.forEach(future -> {
             try {
                 HttpResponse<String> res = future.get();
-                System.out.println(res.body());
+                LOG.log(System.Logger.Level.DEBUG, res.body());
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
