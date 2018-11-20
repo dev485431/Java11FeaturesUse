@@ -11,7 +11,7 @@ public class ConsoleLogger implements System.Logger {
     private String name;
 
     ConsoleLogger(String name) {
-        this.name = "ConsoleLogger@" + name;
+        this.name = name;
     }
 
     @Override
