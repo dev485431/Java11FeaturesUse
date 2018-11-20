@@ -1,7 +1,5 @@
 package com.code.httpclient;
 
-import com.code.logging.ConsoleLogger;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,7 +15,8 @@ import java.util.stream.Collectors;
 
 public class HttpClientExample {
 
-    private static final System.Logger LOG = new ConsoleLogger();
+    private static final System.Logger LOG = System.getLogger("HttpClientExample");
+
     public static void main(String[] args) throws Exception {
         httpGetRequest();
         httpPostRequest();

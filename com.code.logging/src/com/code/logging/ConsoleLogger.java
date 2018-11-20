@@ -8,9 +8,15 @@ import java.util.ResourceBundle;
  */
 public class ConsoleLogger implements System.Logger {
 
+    private String name;
+
+    ConsoleLogger(String name) {
+        this.name = "ConsoleLogger@" + name;
+    }
+
     @Override
     public String getName() {
-        return "ConsoleLogger";
+        return name;
     }
 
     @Override
@@ -20,16 +26,16 @@ public class ConsoleLogger implements System.Logger {
 
     @Override
     public void log(Level level, String msg) {
-        System.out.printf("ConsoleLogger [%s]: %s%n", level, msg);
+        System.out.printf("[%s] [%s]: %s%n", name, level, msg);
     }
 
     @Override
     public void log(Level level, ResourceBundle bundle, String msg, Throwable thrown) {
-        System.out.printf("ConsoleLogger [%s]: %s - %s%n", level, msg, thrown);
+        System.out.printf("[%s] [%s]: %s - %s%n", name, level, msg, thrown);
     }
 
     @Override
     public void log(Level level, ResourceBundle bundle, String format, Object... params) {
-        System.out.printf("ConsoleLogger [%s]: %s%n", level, MessageFormat.format(format, params));
+        System.out.printf("[%s] [%s]: %s%n", name, level, MessageFormat.format(format, params));
     }
 }
